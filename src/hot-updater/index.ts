@@ -1,0 +1,1 @@
+export {hotUpdater} from "./hot-updater";

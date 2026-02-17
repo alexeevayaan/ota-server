@@ -6,10 +6,18 @@
     "dev": "bun run --watch src/index.ts"
   },
   "dependencies": {
-    "elysia": "latest"
+    "@elysiajs/cors": "^1.4.1",
+    "@hot-updater/aws": "^0.25.9",
+    "@hot-updater/server": "^0.25.9",
+    "elysia": "latest",
+    "elysia-rate-limit": "^4.5.0",
+    "logestic": "^1.2.4"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "@types/node": "^25.2.3",
+    "bun-types": "latest",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
   },
   "module": "src/index.js"
 }
