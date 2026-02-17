@@ -1,15 +1,21 @@
 import { Elysia } from "elysia";
 import { hotUpdater } from "./hot-updater";
-import { cors } from '@elysiajs/cors'
-import { rateLimit } from 'elysia-rate-limit'
-import { Logestic } from 'logestic';
+import { configure, getConsoleSink} from "@logtape/logtape";
+import { elysiaLogger } from "@logtape/elysia";
+import { getFileSink } from "@logtape/file";
+
+await configure({
+  sinks: { console: getConsoleSink(), file: getFileSink("app.log") },
+  loggers: [
+    { category: ["elysia"], sinks: ["console", "file"], lowestLevel: "info",}
+  ],
+});
 
 const app = new Elysia() 
-.use(cors({
-    "origin":"*"
+.use(elysiaLogger({
+  format:"combined",
+  level: "info",
 }))
-.use(rateLimit())
-.use(Logestic.preset('common'))
 .mount("/hot-updater", hotUpdater.handler)
 .listen(process.env.PORT ?? 3000) 
 
